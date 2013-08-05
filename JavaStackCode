@@ -1,0 +1,37 @@
+  public static int solutionStack(String s)
+	{
+		ArrayList<Integer> stack = new ArrayList<Integer>();
+
+		char[] cs = s.toCharArray();
+
+		for(char c : cs) {
+
+			if(c == '+' || c == '*') {
+				if(stack.size() < 2)
+					return -1; // only one element in the Stack
+
+				int tmp1 = stack.get(stack.size()-1);
+				int tmp2 = stack.get(stack.size()-2);
+				stack.remove(stack.size()-1);
+				stack.remove(stack.size()-1);
+
+				// for Plus sign
+				if(c == '+') {
+					stack.add(tmp1 + tmp2);
+
+				} 
+				// for Multi sign
+				else {
+					
+					stack.add(tmp1 * tmp2);
+				}
+			} 
+			else { // For Numbers 0-9
+				stack.add(Character.getNumericValue(c));
+			}
+		}
+
+		if(stack.size() == 0) return -1;
+
+		return stack.get(stack.size()-1);			
+	}
